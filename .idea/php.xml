@@ -152,10 +152,8 @@
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-signal-aware-command" />
       <path value="$PROJECT_DIR$/vendor/spatie/db-dumper" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
-      <path value="$PROJECT_DIR$/vendor/bugsnag/bugsnag" />
-      <path value="$PROJECT_DIR$/vendor/bugsnag/bugsnag-psr-logger" />
-      <path value="$PROJECT_DIR$/vendor/bugsnag/bugsnag-laravel" />
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/spatie/error-solutions" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

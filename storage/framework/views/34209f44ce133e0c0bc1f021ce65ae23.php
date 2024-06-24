@@ -1,7 +1,7 @@
 <header>
 
     <div style="background-color: #252525!important" class="header-bottom d-lg-none sticky-nav style-1">
-        <div class="container">
+        <div style="padding: 0!important" class="container">
             <div class="row d-flex justify-content-center align-items-center">
                 <div style="max-width: min-content" class="col">
                     <div  class="header-logo d-flex justify-content-start align-items-center">
@@ -128,7 +128,7 @@
     <!-- header navigation area LARGE SCREEN  start -->
     <div class="header-nav-area d-none d-lg-block sticky-nav">
         <div style="background-color: #252525!important" class="header-bottom  d-none d-lg-block">
-            <div class="container">
+            <div style="padding: 0!important;" class="container">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col">
                         <div class="header-logo d-flex justify-content-start align-items-center">

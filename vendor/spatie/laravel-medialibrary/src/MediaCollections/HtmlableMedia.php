@@ -19,8 +19,7 @@ class HtmlableMedia implements \Stringable, Htmlable
 
     public function __construct(
         protected Media $media
-    ) {
-    }
+    ) {}
 
     public function attributes(array $attributes): self
     {
@@ -51,7 +50,7 @@ class HtmlableMedia implements \Stringable, Htmlable
         return $this;
     }
 
-    public function toHtml()
+    public function toHtml(): string
     {
         $imageGenerator = ImageGeneratorFactory::forMedia($this->media) ?? new Image();
 

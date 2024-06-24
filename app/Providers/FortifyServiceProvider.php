@@ -24,6 +24,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         Fortify::loginView(function () {
+
             return view('auth.login');
         });
 
@@ -31,10 +32,19 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forget-password');
+        });
+
+        Fortify::resetPasswordView(function (Request $request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+
 
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
+
 
                 if(auth()->user()->mob_confirmed===0){
                     return redirect()->route('confirm.mobile');

@@ -43,6 +43,14 @@ class Product extends Model implements  HasMedia
         static::updating(function ($product) {
             $product->slug = $product->createSlug($product->name);
         });
+
+
+        static::deleting(function ($product) {
+            // Delete all media associated with the product
+            foreach ($product->getMedia() as $media) {
+                $media->delete();
+            }
+        });
     }
 
 
@@ -56,4 +64,6 @@ class Product extends Model implements  HasMedia
 
         return $slug;
     }
+
+
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('use_second_banner')->default(1);
             $table->boolean('use_third_banner')->default(1);
             $table->boolean('use_faq')->default(1);
-            $table->boolean('use_service')->default(1);
+            $table->boolean('use_description')->default(1);
             $table->boolean('use_slider')->default(1);
             $table->boolean('use_socials')->default(1);
             $table->boolean('use_spec')->default(1);

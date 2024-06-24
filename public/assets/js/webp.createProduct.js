@@ -40,7 +40,7 @@ function convertToWebP() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };
@@ -90,7 +90,7 @@ function convertToWebP2() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };
@@ -141,7 +141,7 @@ function convertToWebP3() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };
@@ -194,7 +194,7 @@ function convertToWebP4() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };

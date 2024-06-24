@@ -10,22 +10,32 @@
 
 </head>
 <body>
-<dialog style="height: 370px!important;text-align: center" class="dialog" data-modal>
-    <form   action="{{route('shop.store')}}" method="post">
+<dialog  style="height: 500px!important;text-align: center;position: relative" class="dialog" data-modal>
+    <form action="{{route('shop.store')}}" method="post">
         @csrf
         <h2>შექმენი მაღაზია</h2>
-        <label for="">მაღაზიის სახელი</label>
-        <input class="form-input" type="text" name="shop" placeholder="">
-        <label for="">მისამართი</label>
-        <input class="form-input" type="text" name="address" placeholder="">
 
-        <div class="flex-row align-items-center ">
-            <button  STYLE="width: min-content;margin-left: 20px;border-radius: 15px" type="submit" class="button-31 ">შექმნა</button>
+        <label for="shop">მაღაზიის სახელი</label>
+        <input class="form-input" type="text" name="shop" id="shop" placeholder="">
+        @error('shop')
+        <p style="color: red">{{$message}}</p>
+        @enderror
+        <label for="address">მისამართი</label>
+        <input class="form-input" type="text" name="address" id="address" placeholder="არასავალდებულო">
+        @error('address')
+        <p style="color: red">{{$message}}</p>
+        @enderror
+        <label for="description">აღწერა</label>
+        <textarea class="form-input" name="description" id="description" placeholder="არასავალდებულო"></textarea>
+        @error('description')
+        <p style="color: red">{{$message}}</p>
+        @enderror
+        <div style="margin-top: 20px;position: absolute;bottom: 10px;left: 35%" class="flex-row align-items-center ">
+            <button STYLE="width: min-content;margin-left: 20px;border-radius: 15px" type="submit" class="button-31 ">
+                შექმნა
+            </button>
         </div>
-
     </form>
-
-
 </dialog>
 <script>
     document.querySelector("[data-modal]").showModal()

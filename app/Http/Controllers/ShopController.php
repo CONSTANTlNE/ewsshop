@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangeMobileRequest;
+use App\Http\Requests\ShopCreateRequest;
+use App\Http\Requests\ShopSettingsRequest;
 use App\Models\Category;
 use App\Models\Setting;
 use App\Models\Shop;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
 {
@@ -18,9 +23,10 @@ class ShopController extends Controller
             return redirect()->route('confirm.mobile');
         }
 
-        if(Shop::where('user_id',auth()->user()->id)->first()!==null){
-            $shop=auth()->user()->shop->first()->slug;
-            return redirect(route('home',$shop));
+        if (Shop::where('user_id', auth()->user()->id)->first() !== null) {
+            $shop = auth()->user()->shop->first()->slug;
+
+            return redirect(route('home', $shop));
         }
 
         return view('pages.createshop');
@@ -29,11 +35,17 @@ class ShopController extends Controller
     public function store(Request $request)
     {
 
-        $shop          = new Shop();
-        $shop->name    = $request->shop;
-        $shop->address = $request->address;
-        $shop->mobile  = $request->mobile;
-        $shop->user_id = auth()->user()->id;
+        $validate = Validator::make($request->all(), (new ShopCreateRequest())->rules(),
+            (new ShopCreateRequest())->messages());
+        $validated         = $validate->validated();
+
+
+
+        $shop = new Shop();
+        $shop->name        = $validated['shop'];
+        $shop->address     = $validated['address'];
+        $shop->description = $validated['description'];
+        $shop->user_id     = auth()->user()->id;
         $shop->save();
 
         $settings          = new Setting();
@@ -48,22 +60,33 @@ class ShopController extends Controller
         return redirect()->route('home', ['shop' => $shop->slug]);
     }
 
-
     public function mobConfirm()
     {
-        $user         = auth()->user();
+        $user = auth()->user();
 
         if ($user->mob_confirmed === 1) {
             return redirect()->route('shop.create');
         }
 
-        return view('pages.mobileconfirm',compact('user'));
+        return view('pages.mobileconfirm', compact('user'));
     }
-
 
     public function mobStore(Request $request)
     {
-        $user         = auth()->user();
+        $user = auth()->user();
+
+
+        $validate = Validator::make($request->all(), (new ChangeMobileRequest())->rules(),
+            (new ChangeMobileRequest())->messages());
+
+//        if ($validate->fails()) {
+//            $errors = $validate->errors();
+//
+//            return response()->view('htmx.errors', compact('errors',))->setStatusCode(500);
+//
+//        }
+        $validated = $validate->validated();
+
 
         if ($user->mob_confirmed === 1) {
             $user->mob_confirmed = 0;
@@ -73,7 +96,7 @@ class ShopController extends Controller
         $code = random_int(1000, 9999);
 
 
-        $user->mobile = $request->mobile;
+        $user->mobile = $validated['mobile'];
         $user->code   = $code;
         $user->save();
 
@@ -101,14 +124,14 @@ class ShopController extends Controller
         }
 
 
-        return back();
+        return back()->with('mobsuccess','კოდი გამოგზავნილია მითითებულ ნომერზე');
     }
 
     public function mobConfirm2(Request $request)
     {
 
         $user = auth()->user();
-        if ($user->code == $request->code) {
+        if ($user->code == $request->code && $user->code!==null) {
             $user->mob_confirmed = 1;
             $user->save();
 
@@ -117,6 +140,56 @@ class ShopController extends Controller
             } else {
                 return redirect()->route('home', ['shop' => $user->shop->slug]);
             }
+        } else {
+            return back()->with('codeerror', 'არასწორი კოდი');
         }
+    }
+
+    public function logoUpdate(Request $request)
+    {
+        $shop = Shop::where('user_id', auth()->user()->id)->first();
+
+        if ($request->has('logoimg') && $request->logoimg != null) {
+
+            foreach ($shop->media as $media) {
+                $media->delete();
+            }
+
+            $image = $request->logoimg;
+            // Decode the base64 image data
+            $decodedImageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $image));
+
+            // Generate a unique filename for the converted image
+            $filename = 'converted_image_'.time().'.webp';
+
+            // Store the image data using Laravel's storage system
+            Storage::disk('public')->put($filename, $decodedImageData);
+
+            // Add the converted image to the media library
+            $shop->addMedia(storage_path('app/public/'.$filename))
+                ->toMediaCollection('shop_logo');
+            // Delete the temporary file
+            Storage::disk('public')->delete($filename);
+        }
+
+        $shop->save();
+
+        return back();
+    }
+
+    public function descrHtmxEdit(Request $request)
+    {
+        $shop = Shop::where('user_id', auth()->user()->id)->first();
+
+        return view('htmx.editshopdescription', compact('shop'));
+    }
+
+    public function descrHtmxUpdate(Request $request)
+    {
+        $shop              = Shop::where('user_id', auth()->user()->id)->first();
+        $shop->description = $request->description;
+        $shop->save();
+
+        return view('htmx.updateshopdescription');
     }
 }

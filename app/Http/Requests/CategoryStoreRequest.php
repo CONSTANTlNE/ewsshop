@@ -31,7 +31,7 @@ class CategoryStoreRequest extends FormRequest
         return [
             'name.required'=> 'დასახელება სავალდებულოა',
             'name.string' => ' დასახელება უნდა იყოს ტექსტი',
-            'name.max' => 'დასახელება არ უნდა აღემატებოდეს 15 სიმბოლოს',
+            'name.max' => 'დასახელება არ უნდა აღემატებოდეს 15 ქართულ და 45 ლათინურ სიმბოლოს',
         ];
     }
 }

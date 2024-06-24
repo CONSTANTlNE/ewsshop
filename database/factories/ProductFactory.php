@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'SKU' => $this->faker->unique()->ean13,
             'main_page' => $this->faker->boolean,
-            'category_gallery' => $this->faker->boolean,
+
 
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;

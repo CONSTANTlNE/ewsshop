@@ -1,10 +1,19 @@
+.swal2-modal {
+    z-index: 7000 !important;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    content: none!important;
+}
+
+
 .product-image,
 .hover-image,
 .img-responsive
 {
     object-fit: cover;  /* Fits the image within the container while maintaining aspect ratio */
     width: 100%;
-    height: 100%;
+    min-height: 121px;
 }
 .quickviewsmallimg{
     object-fit: cover;
@@ -15,7 +24,7 @@
 .quiviewmainimg{
     object-fit: cover;
     height: 484px;
-    width: 409px!important;
+    width: 409px;
 }
 
 .imagePreview{
@@ -56,7 +65,9 @@
     border-radius: 15px;
     border: 1px solid grey;
     background-color: #f5f5f5;
+    /*position: relative;*/
 }
+
 
 .editmainbannerdialog{
     width: 380px;
@@ -215,12 +226,64 @@
 
 
 
+
+
+
+/*Tooltip */
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the text */
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
 /* Laptop screen */
 @media (min-width: 1024px) {
     .product-image, .hover-image {
         height: 356px !important;
         border-radius: 13px !important;
     }
+
+
+
+    .categoryimg{
+        height: 570px;
+        width: 540px;
+        object-fit: cover;
+
+    }
+
+    .singleimgsmall{
+        min-height: 121px!important;
+        min-width: 121px!important;
+        object-fit: cover;
+    }
+
 }
 
 /* Middle screen (tablets and small desktops) */
@@ -229,6 +292,17 @@
         height: 226px !important;
         border-radius: 13px !important;
 
+    }
+
+    .categoryimg{
+        height: 312px;
+        width: 330px;
+    }
+
+    .singleimgsmall{
+        min-height: 121px!important;
+        min-width: 121px!important;
+        object-fit: cover;
     }
 }
 
@@ -247,5 +321,22 @@
         height: 136px;
         border-radius: 13px !important;
 
+    }
+
+    .categoryimg{
+        height: 312px;
+        width: 330px;
+    }
+
+    .singleimgsmall{
+        height: 61px;
+        width: 61px;
+        object-fit: cover;
+    }
+
+    .quiviewmainimg{
+        object-fit: cover;
+        height: 484px;
+        width: 360px!important;
     }
 }

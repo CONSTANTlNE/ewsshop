@@ -1,4 +1,4 @@
-@if ($errors->any())
+@if (isset($errors))
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)

@@ -1,7 +1,8 @@
+
+
+
 (function($) {
     "use strict";
-
-
 
     /*---------------------------
        Commons Variables
@@ -111,6 +112,7 @@
     var heroSlider = new Swiper('.hero-slider.swiper-container', {
         loop: true,
         speed: 2000,
+
         effect: "fade",
         autoplay: {
             delay: 7000,
@@ -447,12 +449,12 @@
     /*---------------------
         Scroll Up
     --------------------- */
-    $.scrollUp({
-        scrollText: '<i class="pe-7s-angle-up"></i>',
-        easingType: "linear",
-        scrollSpeed: 900,
-        animation: "fade",
-    });
+    // $.scrollUp({
+    //     scrollText: '<i class="pe-7s-angle-up"></i>',
+    //     easingType: "linear",
+    //     scrollSpeed: 900,
+    //     animation: "fade",
+    // });
     /*---------------------
         Countdown
     --------------------- */

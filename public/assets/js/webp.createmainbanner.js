@@ -1,7 +1,10 @@
 // Upload main banner
 edituploadbutton2=document.querySelector('[data-mainbanner-newopload]')
+
 edituploadbutton2.addEventListener('click',()=>{
     document.querySelector("[data-mainbanner-image]").click()
+
+
 })
 
 
@@ -44,7 +47,7 @@ function convertToWebPmain() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };

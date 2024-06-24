@@ -1,538 +1,411 @@
-@extends('shop.layout')
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
 
-@section('single-product')
 
-    <!-- breadcrumb-area start -->
-{{--    @include('components.breadcrumbs')--}}
-    <!-- breadcrumb-area end -->
+<!-- Mirrored from htmldemo.net/hmart/hmart/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 May 2024 11:19:37 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{$product->name}}</title>
+    <meta name="robots" content="index, follow"/>
+    <meta name="description" content="{{$product->description}}">
 
-        <!-- Product Details Area Start -->
-        <div class="product-details-area pt-100px pb-100px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
-                        <!-- Swiper -->
-                        <div class="swiper-container zoom-top">
-                            <div class="swiper-wrapper">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/logo/logo2.png')}}"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <!-- CSS
+    ============================================ -->
+
+    <meta property="og:title" content="{{$product->name}}">
+    <meta property="og:description" content="{{$product->description}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    @foreach($product->media as $media)
+        @if($loop->first)
+    <meta property="og:image" content="{{$media->getUrl()}}">
+        @endif
+    @endforeach
+    <meta property="og:image:alt" content="{{$product->name}}">
+    <meta property="og:site_name" content="https://shop.ews.ge/">
+
+    @vite(['resources/js/app.js','resources/css/app.css'])
+
+
+    <link rel="stylesheet" href="{{asset('assets/myStyle.css')}}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.12"
+            integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
+
+    <script type="module">
+        import BugsnagPerformance from '//d2wy8f7a9ursnm.cloudfront.net/v1/bugsnag-performance.min.js'
+
+        BugsnagPerformance.start({apiKey: 'edc3d7c94b8f7fb25a4e9a7aa9432ff4'})
+    </script>
+</head>
+
+<body hx-ext="response-targets">
+<div class="main-wrapper">
+
+    @include('components.header')
+
+    @include('components.offcanvas')
+
+
+    <!-- MAIN CONTENT -->
+    <!-- Product Details Area Start -->
+    <div class="product-details-area pt-100px pb-100px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
+                    <!-- Swiper -->
+                    <div class="swiper-container zoom-top">
+                        <div class="swiper-wrapper">
+                            @foreach($product->media as $media)
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/zoom-image/1.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="../assets/images/product-image/zoom-image/1.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                    <img style="border-radius: 10px" class="img-responsive m-auto singleimg"
+                                         src="{{$media->getUrl()}}" alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery"
+                                       href="{{$media->getUrl()}}">
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"><defs><mask id="solarMagniferZoomInLineDuotone0"><g fill="none" stroke-width="1.5"><circle cx="11.5" cy="11.5" r="9.5" stroke="gray"/><path stroke="#fff" stroke-linecap="round" d="M18.5 18.5L22 22M9 11.5h2.5m0 0H14m-2.5 0V14m0-2.5V9"/></g></mask></defs><path fill="currentColor" d="M0 0h24v24H0z" mask="url(#solarMagniferZoomInLineDuotone0)"/></svg>
+
                                     </a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/zoom-image/2.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="../assets/images/product-image/zoom-image/2.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/zoom-image/3.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="../assets/images/product-image/zoom-image/3.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/zoom-image/4.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="../assets/images/product-image/zoom-image/4.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/zoom-image/5.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="../assets/images/product-image/zoom-image/5.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/small-image/1.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/small-image/2.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/small-image/3.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/small-image/4.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="../assets/images/product-image/small-image/5.webp" alt="">
-                                </div>
-                            </div>
-                            <!-- Add Arrows -->
-                            <div class="swiper-buttons">
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
-                        <div class="product-details-content quickview-content ml-25px">
-                            <h2>სმარტფონი</h2>
-                            <div class="pricing-meta">
-                                <ul class="d-flex">
-                                    <li class="new-price">₾ 300</li>
-                                </ul>
-                            </div>
-{{--                            <div class="pro-details-rating-wrap">--}}
-{{--                                <div class="rating-product">--}}
-{{--                                    <i class="fa fa-star"></i>--}}
-{{--                                    <i class="fa fa-star"></i>--}}
-{{--                                    <i class="fa fa-star"></i>--}}
-{{--                                    <i class="fa fa-star"></i>--}}
-{{--                                    <i class="fa fa-star"></i>--}}
-{{--                                </div>--}}
-{{--                                <span class="read-review"><a class="reviews" href="#">(5 Customer Review)</a></span>--}}
-{{--                            </div>--}}
-                            <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
-                            <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                <span>კოდი:</span>
-                                <ul class="d-flex">
-                                    <li>
-                                        <a href="#">Ch-256xl</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                <span>კატეგორია: </span>
-                                <ul class="d-flex">
-                                    <li>
-                                        <a href="#">მობილური ტელეფონები, </a>
-                                    </li>
-{{--                                    <li>--}}
-{{--                                        <a href="#">ETC</a>--}}
-{{--                                    </li>--}}
-                                </ul>
-                            </div>
-{{--                            <div class="pro-details-categories-info pro-details-same-style d-flex m-0">--}}
-{{--                                <span>Tags: </span>--}}
-{{--                                <ul class="d-flex">--}}
-{{--                                    <li>--}}
-{{--                                        <a href="#">Smart Device, </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a href="#">Phone</a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                            <div class="pro-details-quality">--}}
-{{--                                <div class="cart-plus-minus">--}}
-{{--                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />--}}
-{{--                                </div>--}}
-{{--                                <div class="pro-details-cart">--}}
-{{--                                    <button class="add-cart"> Add To--}}
-{{--                                        Cart</button>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro-details-compare-wishlist pro-details-wishlist ">--}}
-{{--                                    <a href="wishlist.html"><i class="pe-7s-like"></i></a>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro-details-compare-wishlist pro-details-wishlist ">--}}
-{{--                                    <a href="compare.html"><i class="pe-7s-refresh-2"></i></a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                    <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
+                        <div class="swiper-wrapper">
+                            @foreach($product->media as $media)
+                                <div class="swiper-slide">
+                                    <img   class="singleimgsmall img-responsive m-auto "
+                                           src="{{$media->getUrl()}}" alt="">
+                                </div>
+                            @endforeach
                         </div>
-                        <!-- product details description area start -->
-                        <div class="description-review-wrapper">
+                        <!-- Add Arrows -->
+                        <div class="swiper-buttons">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-details-content quickview-content ml-25px">
+                        <h2>{{$product->name}}</h2>
+                        <div class="pricing-meta">
+                            <ul class="d-flex">
+                                <li class="new-price">₾ {{$product->price}}</li>
+                            </ul>
+                        </div>
+
+                        <p class="mt-30px">
+                            {{$product->description}}
+                        </p>
+                        <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                            <span>კოდი:</span>
+                            <ul class="d-flex">
+                                <li>
+                                    <a href="#">{{$product->SKU}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                            <span>კატეგორია: </span>
+                            <ul class="d-flex">
+                                <li>
+                                    <a href="{{route('categories',['shop'=>request()->segment(1),'category'=>$product->category->slug])}}">{{$product->category->name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="width: max-content" class="mt-2 pro-details-categories-info pro-details-same-style d-flex gap-3 justify-content-start align-items-center mt-2">
+                            @if($shop->messenger!==null && $shop->settings->first()->use_messenger===1)
+                                <span style="margin:0!important">მოგვწერეთ</span>
+                                <a href="https://m.me/{{$shop->messenger}}?text={{route('single.product',['shop'=>request()->segment(1),'product'=>$product->slug])}}"
+                                   target="_blank">
+                                    <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                         preserveAspectRatio="xMidYMid">
+                                        <defs>
+                                            <radialGradient id="a" cx="19.247%" cy="99.465%" r="108.96%" fx="19.247%" fy="99.465%">
+                                                <stop offset="0%" stop-color="#09F"></stop>
+                                                <stop offset="60.975%" stop-color="#A033FF"></stop>
+                                                <stop offset="93.482%" stop-color="#FF5280"></stop>
+                                                <stop offset="100%" stop-color="#FF7061"></stop>
+                                            </radialGradient>
+                                        </defs>
+                                        <path fill="url(#a)"
+                                              d="M128 0C55.894 0 0 52.818 0 124.16c0 37.317 15.293 69.562 40.2 91.835 2.09 1.871 3.352 4.493 3.438 7.298l.697 22.77c.223 7.262 7.724 11.988 14.37 9.054L84.111 243.9a10.218 10.218 0 0 1 6.837-.501c11.675 3.21 24.1 4.92 37.052 4.92 72.106 0 128-52.818 128-124.16S200.106 0 128 0Z"></path>
+                                        <path fill="#FFF"
+                                              d="m51.137 160.47 37.6-59.653c5.98-9.49 18.788-11.853 27.762-5.123l29.905 22.43a7.68 7.68 0 0 0 9.252-.027l40.388-30.652c5.39-4.091 12.428 2.36 8.82 8.085l-37.6 59.654c-5.981 9.489-18.79 11.852-27.763 5.122l-29.906-22.43a7.68 7.68 0 0 0-9.25.027l-40.39 30.652c-5.39 4.09-12.427-2.36-8.818-8.085Z"></path>
+                                    </svg>
+                                </a>
+                            @endif
+                            <span style="margin:0!important">გააზიარე</span>
+                            <div class="d-flex align-items-center justify-content-center gap-4">
+
+                                <svg style="cursor: pointer" onclick="copyLinkToClipboard()" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                                    <g fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 7c0-.932 0-1.398-.152-1.765a2 2 0 0 0-1.083-1.083C12.398 4 11.932 4 11 4H8c-1.886 0-2.828 0-3.414.586C4 5.172 4 6.114 4 8v3c0 .932 0 1.398.152 1.765a2 2 0 0 0 1.083 1.083C5.602 14 6.068 14 7 14"/>
+                                        <rect width="10" height="10" x="10" y="10" rx="2"/>
+                                    </g>
+                                </svg>
+
+
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{route('single.product',['shop'=>request()->segment(1),'product'=>$product->slug])}}"
+                                   target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="url(#a)" height="40" width="40">
+                                        <defs>
+                                            <linearGradient x1="50%" x2="50%" y1="97.078%" y2="0%" id="a">
+                                                <stop offset="0%" stop-color="#0062E0"></stop>
+                                                <stop offset="100%" stop-color="#19AFFF"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M15 35.8C6.5 34.3 0 26.9 0 18 0 8.1 8.1 0 18 0s18 8.1 18 18c0 8.9-6.5 16.3-15 17.8l-1-.8h-4l-1 .8z"></path>
+                                        <path fill="#FFF"
+                                              d="m25 23 .8-5H21v-3.5c0-1.4.5-2.5 2.7-2.5H26V7.4c-1.3-.2-2.7-.4-4-.4-4.1 0-7 2.5-7 7v4h-4.5v5H15v12.7c1 .2 2 .3 3 .3s2-.1 3-.3V23h4z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- product details description area start -->
+                    <div class="description-review-wrapper">
+                        @if($product->specs->first())
                             <div class="description-review-topbar nav">
                                 <button data-bs-toggle="tab" data-bs-target="#des-details2">მახასიათებლები</button>
-                                <button class="active" data-bs-toggle="tab" data-bs-target="#des-details1">აღწერა</button>
-{{--                                <button data-bs-toggle="tab" data-bs-target="#des-details3">Reviews (02)</button>--}}
+                                {{--                            <button class="active" data-bs-toggle="tab" data-bs-target="#des-details1">აღწერა</button>--}}
+                                {{--                                <button data-bs-toggle="tab" data-bs-target="#des-details3">Reviews (02)</button>--}}
                             </div>
                             <div class="tab-content description-review-bottom">
-                                <div id="des-details2" class="tab-pane">
+                                <div id="des-details2" class="tab-pane active">
                                     <div class="product-anotherinfo-wrapper text-start">
                                         <ul>
-                                            <li><span>წონა</span> 400 g</li>
-                                            <li><span>ზომა</span>10 x 10 x 15 cm</li>
-                                            <li><span>მასალა</span> 60% cotton, 40% polyester</li>
-                                            <li><span>სხვა</span> American heirloom jean shorts pug seitan letterpress</li>
+                                            @foreach($product->specs as $spec)
+                                                <li><span>{{$spec->name}}</span>{{$spec->value}}</li>
+                                            @endforeach
+
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="des-details1" class="tab-pane active">
-                                    <div class="product-description-wrapper">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip efgx ea co consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occae cupidatat non proident, sunt in culpa qui
-                                        </p>
-                                    </div>
-                                </div>
-                                <div id="des-details3" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="review-wrapper">
-                                                <div class="single-review">
-                                                    <div class="review-img">
-                                                        <img src="assets/images/review-image/1.png" alt="" />
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <div class="review-top-wrap">
-                                                            <div class="review-left">
-                                                                <div class="review-name">
-                                                                    <h4>White Lewis</h4>
-                                                                </div>
-                                                                <div class="rating-product">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="review-left">
-                                                                <a href="#">Reply</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-bottom">
-                                                            <p>
-                                                                Vestibulum ante ipsum primis aucibus orci luctustrices posuere
-                                                                cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper
-                                                                euismod vehicula. Phasellus quam nisi, congue id nulla.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-review child-review">
-                                                    <div class="review-img">
-                                                        <img src="assets/images/review-image/2.png" alt="" />
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <div class="review-top-wrap">
-                                                            <div class="review-left">
-                                                                <div class="review-name">
-                                                                    <h4>White Lewis</h4>
-                                                                </div>
-                                                                <div class="rating-product">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="review-left">
-                                                                <a href="#">Reply</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-bottom">
-                                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere
-                                                                cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper
-                                                                euismod vehicula.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="ratting-form-wrapper pl-50">
-                                                <h3>Add a Review</h3>
-                                                <div class="ratting-form">
-                                                    <form action="#">
-                                                        <div class="star-box">
-                                                            <span>Your rating:</span>
-                                                            <div class="rating-product">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="rating-form-style">
-                                                                    <input placeholder="Name" type="text" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="rating-form-style">
-                                                                    <input placeholder="Email" type="email" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="rating-form-style form-submit">
-                                                                    <textarea name="Your Review" placeholder="Message"></textarea>
-                                                                    <button class="btn btn-primary btn-hover-color-primary " type="submit" value="Submit">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{--                            <div id="des-details1" class="tab-pane active">--}}
+                                {{--                                <div class="product-description-wrapper">--}}
+                                {{--                                    <p>--}}
+                                {{--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor--}}
+                                {{--                                        incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud--}}
+                                {{--                                        exercitation ullamco laboris nisi ut aliquip efgx ea co consequat. Duis aute--}}
+                                {{--                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat--}}
+                                {{--                                        nulla pariatur. Excepteur sint occae cupidatat non proident, sunt in culpa qui--}}
+                                {{--                                    </p>--}}
+                                {{--                                </div>--}}
+                                {{--                            </div>--}}
+
                             </div>
-                        </div>
-                        <!-- product details description area end -->
+                        @endif
                     </div>
+
+                    <!-- product details description area end -->
                 </div>
             </div>
         </div>
-        <!-- Product Area Start -->
-        <div class="product-area related-product">
-            <div class="container">
-                <!-- Section Title & Tab Start -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title text-center m-0">
-                            <h2 class="title">მსგავსი პროდუქტები</h2>
-{{--                            <p>There are many variations of passages of Lorem Ipsum available</p>--}}
-                        </div>
+    </div>
+    <!-- Product Area Start -->
+    <div class="product-area related-product">
+        <div class="container">
+            <!-- Section Title & Tab Start -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center m-0">
+                        <h2 class="title">მსგავსი პროდუქტები</h2>
+                        {{--                            <p>There are many variations of passages of Lorem Ipsum available</p>--}}
                     </div>
                 </div>
-                <!-- Section Title & Tab End -->
-                <div class="row">
-                    <div class="col">
-                        <div class="new-product-slider swiper-container slider-nav-style-1">
-                            <div class="swiper-wrapper">
+            </div>
+            <!-- Section Title & Tab End -->
+            <div class="row">
+                <div class="col">
+                    <div class="new-product-slider swiper-container slider-nav-style-1">
+                        <div class="swiper-wrapper">
+                            @foreach($productcategory->products as $catproduct)
                                 <div class="swiper-slide">
                                     <!-- Single Prodect -->
                                     <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="new">New</span>--}}
-{{--                                        </span>--}}
+
                                         <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/1.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/1.webp" alt="Product" />
+
+                                            <a href="{{route('single.product',['shop'=>request()->segment(1),'product' => $catproduct->slug])}}"
+                                               class="image">
+                                                @foreach($catproduct->media as $media2)
+                                                    @if($loop->first)
+                                                        <img style="border-radius: 15px" src="{{$media2->getUrl()}}"
+                                                             alt="Product"/>
+                                                        <img style="border-radius: 15px!important;" class="hover-image"
+                                                             src="{{$media2->getUrl()}}"
+                                                             alt="Product"/>
+                                                    @endif
+                                                @endforeach
                                             </a>
                                         </div>
                                         <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">სმარტფონი
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                            <span class="new">₾ 38.50</span>
+                                            <span class="category mt-2">
+                                                          <a href="{{route('categories',['shop'=>request()->segment(1),'category'=>$productcategory->slug])}}">{{$product->category->name}}</a>
+
+
                                             </span>
-                                        </div>
-                                        <div class="actions">
-{{--                                            <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i--}}
-{{--                                                class="pe-7s-shopbag"></i></button>--}}
-{{--                                            <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i--}}
-{{--                                                    class="pe-7s-like"></i></button>--}}
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-{{--                                            <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i--}}
-{{--                                                    class="pe-7s-refresh-2"></i></button>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="sale">-10%</span>--}}
-{{--                                        <span class="new">New</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/2.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/2.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}l">ბლუთუზ ყურსასმენი
+                                            <h5 class="title">
+                                                <a
+                                                        href="{{route('single.product', ['shop'=>$shop->slug,'product' => $catproduct->slug])}}">{{$catproduct->name}}
                                                 </a>
                                             </h5>
                                             <span class="price">
-{{--                                            <span class="old">$48.50</span>--}}
-                                            <span class="new">₾ 38.50</span>
+                                            <span class="new">₾ {{$catproduct->price}}</span>
                                             </span>
                                         </div>
                                         <div class="actions">
 
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
                                         </div>
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="new">Sale</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/3.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/3.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">სმარტ დინამიკი
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                            <span class="new">₾ 38.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="new">New</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/4.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/1.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">ეარპოდი 25Hjkl შავი
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                            <span class="new">₾ 38.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <span class="badges">
-                                    </span>
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/5.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/5.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">სმარტ საათი
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                            <span class="new">₾ 38.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="sale">-8%</span>--}}
-{{--                                        <span class="new">Sale</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/6.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/6.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">სმარტ კამერა
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-{{--                                            <span class="old">$138.50</span>--}}
-                                            <span class="new">₾ 112.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="new">Sale</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/7.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/1.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">ჯიბის მრგვალი როუტერი
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                            <span class="new">₾ 38.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-{{--                                        <span class="badges">--}}
-{{--                                        <span class="sale">-5%</span>--}}
-{{--                                        </span>--}}
-                                        <div class="thumb">
-                                            <a href="{{route('single.product')}}" class="image">
-                                                <img src="../assets/images/product-image/8.webp" alt="Product" />
-                                                <img class="hover-image" src="../assets/images/product-image/8.webp" alt="Product" />
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="category"><a href="#">აქსესუარები</a></span>
-                                            <h5 class="title"><a href="{{route('products')}}">Power Bank 10000Mhp
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-{{--                                            <span class="old">$260.00</span>--}}
-                                            <span class="new">₾ 238.50</span>
-                                            </span>
-                                        </div>
-                                        <div class="actions">
-
-                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Add Arrows -->
-                            <div class="swiper-buttons">
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
+                            @endforeach
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-buttons">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Product Area End -->
+    </div>
+    <!-- Product Area End -->
 
-@endsection
+    <!-- MAIN CONTENT -->
+
+
+    {{--        =========================================================================================--}}
+
+    <!-- Footer Area Start -->
+    @include('components.footer')
+    <!-- Footer Area End -->
+</div>
+
+
+<!--Product Quick View Modal -->
+
+<div class="modal modal-2 fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body" id="quickviewtarget" style="z-index: 6000!important;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Global Vendor, plugins JS -->
+<!-- JS Files
+============================================ -->
+<script src="{{asset('assets/js/custom-htmx.js')}}"></script>
+<script src="{{asset('assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/plugins/scrollUp.js')}}"></script>--}}
+<script src="{{asset('assets/js/plugins/venobox.min.js')}}"></script>
+
+
+<!--Main JS (Common Activation Codes)-->
+<script src="{{asset('assets/js/main.js')}}"></script>
+
+@if(request()->routeIs('home'))
+    <script src="{{asset('assets/js/webp.createProduct.js')}}"></script>
+@endif
+<script src="{{asset('assets/js/webp.createmainbanner.js')}}"></script>
+<script src="{{asset('assets/js/sitesettings.js')}}"></script>
+
+
+
+{{-- SINGLE PRODUCT SCRIPT--}}
+<script>
+
+    function copyLinkToClipboard() {
+        const linkToCopy = '{{route('single.product',['shop'=>request()->segment(1),'product'=>$product->slug])}}';
+        navigator.clipboard.writeText(linkToCopy)
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "დაკოპირებულია",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+    }
+</script>
+
+
+
+
+{{--scroll position--}}
+<script>
+
+    // Track scroll position and update URL parameters
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('scroll', scrollPosition);
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        window.history.replaceState({path: newUrl}, '', newUrl);
+    });
+
+    // Restore scroll position from URL parameters
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const scrollPosition = urlParams.get('scroll');
+        if (scrollPosition !== null) {
+            window.scrollTo(0, parseInt(scrollPosition));
+        }
+    });
+
+    // Handle click events on sorting links
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', event => {
+            event.preventDefault(); // Prevent default link behavior
+            const url = new URL(event.target.href);
+            const urlParams = new URLSearchParams(url.search);
+            const scrollPosition = window.scrollY; // Get current scroll position
+            urlParams.set('scroll', scrollPosition); // Add scroll position to the URL
+            url.search = urlParams.toString();
+            window.location.href = url.toString(); // Navigate to the new URL
+        });
+    });
+
+
+</script>
+
+@if(session()->has('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Swal.fire({
+                title: "{{ session('error') }}",
+                icon: "warning",
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: "გასაგებია",
+                confirmButtonColor: "#3085d6",
+            });
+        })
+    </script>
+@endif
+
+
+</body>
+
+
+</html>

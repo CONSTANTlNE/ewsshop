@@ -1,3 +1,5 @@
+
+
 // Upload button 1
  edituploadbutton=document.querySelector('[data-product-editnewopload]')
 edituploadbutton.addEventListener('click',()=>{

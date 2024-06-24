@@ -10,13 +10,14 @@
 
         <!-- Shop Page Start  -->
         <div class="shop-category-area pt-100px pb-100px">
-            <div class="container">
+            <div id="categorycontainer" class="container">
                 <div class="row">
                     <div class="col-lg-9 order-lg-last col-md-12 order-md-last">
 
                         <!-- Shop Top Area Start -->
                         <div class="shop-top-bar d-flex">
-
+                            <p style="width: max-content!important;padding-left: 10px;padding-right: 10px"
+                               class="compare-product ">კატეგორია {{$categories->name}}</p>
                             <div class="select-shoing-wrap d-flex align-items-center">
                                 <div class="shot-product">
                                     <p>სორტირება:</p>
@@ -62,81 +63,85 @@
                         <!-- PRODUCTS AREA -->
                         <div class="shop-bottom-area">
                             <!-- Tab Content Area Start -->
-                            <div class="row">
-                                <div class="col">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="shop-grid">
-                                            {{-- Product Area --}}
-                                            <div class="row mb-n-30px">
-                                                @foreach($categories->products as $product)
-                                                    <div class="col-md-4 col-sm-6 col-6 mb-30px">
-                                                        @auth
-                                                            <div class="d-flex justify-content-around align-items-center">
-                                                                <form action="{{route('product.update',['shop'=>request()->segment(1)])}}"
-                                                                      method="post">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                           value="{{$product->id}}">
-                                                                    <button id="editproductmain" data-open-edit
-                                                                            hx-target="#editproductmodal"
-                                                                            hx-get="{{route('product.edit',['shop'=>request()->segment(1),'product'=>$product->id])}}">
-                                                                        <img style="height: 30px;width: 30px;margin-bottom: 20px; cursor:pointer"
-                                                                             src="{{asset('assets/icons/edit_icon.svg')}}"
-                                                                             alt="">
-                                                                    </button>
-                                                                </form>
-                                                                <form action="{{route('product.delete',['shop'=>request()->segment(1)])}}"
-                                                                      method="post">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                           value="{{$product->id}}">
-                                                                    <button>
-                                                                        <img style="height: 30px;width: 30px;margin-bottom: 20px;cursor:pointer"
-                                                                             src="{{asset('assets/icons/delete_remove_icon.svg')}}"
-                                                                             alt="">
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        @endauth
-                                                        <div class="product">
+                            <div id="categorypage">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="shop-grid">
+                                                {{-- Product Area --}}
+                                                <div class="row mb-n-30px justify-content-center">
+                                                    @foreach($categories->products as $product)
+                                                        <div class="col-md-4 col-sm-6 col-6 mb-30px">
+                                                            @auth
+                                                                <div class="d-flex justify-content-around align-items-center">
+                                                                    <form action="{{route('product.update',['shop'=>request()->segment(1)])}}"
+                                                                          method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                               value="{{$product->id}}">
+                                                                        <button id="editproductmain" data-open-edit
+                                                                                hx-target="#editproductmodal"
+                                                                                hx-get="{{route('product.edit',['shop'=>request()->segment(1),'product'=>$product->id,'initiator'=>'category','categoryid'=>$categories->id])}}">
+                                                                            <img style="height: 30px;width: 30px;margin-bottom: 20px; cursor:pointer"
+                                                                                 src="{{asset('assets/icons/edit_icon.svg')}}"
+                                                                                 alt="">
+                                                                        </button>
+                                                                    </form>
+                                                                    <form action="{{route('product.delete',['shop'=>request()->segment(1)])}}"
+                                                                          method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                               value="{{$product->id}}">
+                                                                        <button class="deletecatbutton"
+                                                                                type="submit"></button>
+                                                                        <button type="button"
+                                                                                class="deleteproductfromcat">
+                                                                            <img style="height: 30px;width: 30px;margin-bottom: 20px;cursor:pointer"
+                                                                                 src="{{asset('assets/icons/delete_remove_icon.svg')}}"
+                                                                                 alt="">
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            @endauth
+                                                            <div class="product">
 
-                                                            <div class="thumb">
-                                                                <a style="border-radius: 15px!important"
-
-                                                                   data-bs-target="#exampleModal"
-                                                                   data-bs-toggle="modal"
-                                                                   hx-target="#quickviewtarget"
-                                                                   hx-get="{{route('quickView', ['shop'=>request()->segment(1),'product' => $product->id])}}"
-                                                                   class="image">
-                                                                    @if(!$product->getMedia('product_image1')->isEmpty())
-                                                                        <img class="product-image"
-                                                                             src="{{$product->getMedia('product_image1')[0]->getUrl()}}"
-                                                                             alt="Product"/>
-                                                                        <img class="hover-image"
-                                                                             src="{{$product->getMedia('product_image1')[0]->getUrl()}}"
-                                                                             alt="Product"/>
-                                                                    @endif
-                                                                </a>
-                                                            </div>
-                                                            <div class="content">
+                                                                <div class="thumb">
+                                                                    <a style="border-radius: 15px!important"
+                                                                       data-bs-target="#exampleModal"
+                                                                       data-bs-toggle="modal"
+                                                                       hx-target="#quickviewtarget"
+                                                                       hx-get="{{route('quickView', ['shop'=>request()->segment(1),'product' => $product->id])}}"
+                                                                       class="image">
+                                                                        @if(!$product->getMedia('product_image1')->isEmpty())
+                                                                            <img class="product-image"
+                                                                                 src="{{$product->getMedia('product_image1')[0]->getUrl()}}"
+                                                                                 alt="Product"/>
+                                                                            <img class="hover-image"
+                                                                                 src="{{$product->getMedia('product_image1')[0]->getUrl()}}"
+                                                                                 alt="Product"/>
+                                                                        @endif
+                                                                    </a>
+                                                                </div>
+                                                                <div class="content">
                                                                 <span class="category mt-2"><a
                                                                             href="#">{{$categories->name}}</a></span>
-                                                                <h5 class="title text-center"><a
-                                                                            href="single-product.html">{{$product->name}}
-                                                                    </a>
-                                                                </h5>
-                                                                <span class="price">
-                                            <span class="new">₾ {{$product->price}}</span>
-                                                                </span>
-                                                            </div>
-                                                            <div class="actions">
+                                                                    <h5 class="title text-center"><a
+                                                                                href="{{route('single.product', ['shop'=>$shop->slug,'product' => $product->slug])}}">{{$product->name}}
 
+                                                                        </a>
+                                                                    </h5>
+                                                                    <span class="price">
+                                                                <span class="new">₾ {{$product->price}}</span>
+                                                                </span>
+                                                                </div>
+                                                                <div class="actions">
+
+                                                                </div>
                                                             </div>
 
                                                         </div>
-
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -177,18 +182,15 @@
 
                                                         @endphp
                                                 <span>({{$productscount}})</span> </a></li>
-                                        @foreach($shop->categories as $category)
-                                            <li>
-
-                                                <a
-                                                        @if(request()->is(request()->segment(1)  . '/'. $category->slug))
-                                                            style="color: blue"
-                                                        @endif
-                                                        href="{{route('categories',['shop'=>request()->segment(1),'category'=>$category->slug])}}"
-                                                        class="selected m-0">
-                                                    {{$category->name}}
-                                                    <span>({{$category->products->count() }})</span> </a></li>
-                                        @endforeach
+                                        @if($shop->settings->first()->use_category===1)
+                                            @foreach($shop->categories as $category)
+                                                <li>
+                                                    <a href="{{route('categories',['shop'=>request()->segment(1),'category'=>$category->slug])}}"
+                                                       class="selected m-0">
+                                                        {{$category->name}}
+                                                        <span>({{$category->products->count() }})</span> </a></li>
+                                            @endforeach
+                                        @endif
 
                                     </ul>
                                 </div>
@@ -209,3 +211,35 @@
 
     </dialog>
 @endsection
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        deleteproductfromcat = document.querySelectorAll('.deleteproductfromcat')
+        deletecatbutton = document.querySelectorAll('.deletecatbutton')
+
+        deleteproductfromcat.forEach((el, index) => {
+            el.addEventListener('click', () => {
+
+                Swal.fire({
+                    title: "ნამდვილად გსურთ წაშლა?",
+                    // text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "გაუქმება",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "წაშლე"
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            deletecatbutton[index].click()
+                        }
+                    });
+            })
+        })
+
+    })
+
+</script>

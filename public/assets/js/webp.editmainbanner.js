@@ -34,7 +34,7 @@ function convertToWebPmain() {
 
             // Submit the form
             // document.getElementById("existingForm").submit();
-            console.log('conversion finished')
+
         };
         image.src = event.target.result;
     };

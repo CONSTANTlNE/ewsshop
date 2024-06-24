@@ -27,12 +27,6 @@ class MainBannerController extends Controller
 
     }
 
-
-    /**
-     * @throws ValidationException
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
-     */
     public function store(Request $request)
     {
 
@@ -134,9 +128,6 @@ class MainBannerController extends Controller
         return back();
     }
 
-
-
-
     public function delete(Request $request){
 
         $banner = MainBanner::where('shop_id', auth()->user()->shop->id)
@@ -145,11 +136,8 @@ class MainBannerController extends Controller
 
         $banner->delete();
 
-        return back();
+        return  response()->noContent();
     }
-
-
-
 
 
 }

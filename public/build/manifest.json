@@ -1,0 +1,69 @@
+{
+  "public/assets/fonts/Pe-icon-7-strokebb1d.eot": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/Pe-icon-7-strokebb1d.svg": {
+    "file": "assets/Pe-icon-7-strokebb1d-B0ODSzhW.svg",
+    "src": "public/assets/fonts/Pe-icon-7-strokebb1d.svg"
+  },
+  "public/assets/fonts/Pe-icon-7-strokebb1d.ttf": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/Pe-icon-7-strokebb1d.woff": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/Pe-icon-7-stroked41d.eot": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/fontawesome-webfont3e6e.eot": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/fontawesome-webfont3e6e.svg": {
+    "file": "assets/fontawesome-webfont3e6e-D13rzr4g.svg",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.svg"
+  },
+  "public/assets/fonts/fontawesome-webfont3e6e.ttf": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/fontawesome-webfont3e6e.woff": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/fontawesome-webfont3e6e.woff2": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/fonts/fontawesome-webfontd41d.eot": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/images/about/breadcrunb-bg.webp": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/images/blog-image/quate-icon.png": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "public/assets/images/testimonial/quote-shape.png": {
+    "file": "assets/quate-icon-B_SY1GJM.png",
+    "src": "public/assets/fonts/fontawesome-webfont3e6e.ttf"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CzOGpsMX.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BUIgJD6w.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
